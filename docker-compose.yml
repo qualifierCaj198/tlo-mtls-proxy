@@ -1,0 +1,14 @@
+services:
+  proxy:
+    build: ./app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./secrets:/secrets:ro
+    environment:
+      - TLO_USERNAME=${TLO_USERNAME}
+      - TLO_PASSWORD=${TLO_PASSWORD}
+      - SHARED_SECRET=${SHARED_SECRET}
+      - TLO_CERT_PATH=/secrets/tlo_client.crt
+      - TLO_KEY_PATH=/secrets/tlo_client.key
+    restart: unless-stopped
