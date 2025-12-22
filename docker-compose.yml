@@ -1,14 +1,11 @@
+version: "3.8"
 services:
-  proxy:
-    build: ./app
+  api:
+    build: .
     ports:
       - "3000:3000"
+    env_file:
+      - .env
     volumes:
-      - ./secrets:/secrets:ro
-    environment:
-      - TLO_USERNAME=${TLO_USERNAME}
-      - TLO_PASSWORD=${TLO_PASSWORD}
-      - SHARED_SECRET=${SHARED_SECRET}
-      - TLO_CERT_PATH=/secrets/tlo_client.crt
-      - TLO_KEY_PATH=/secrets/tlo_client.key
+      - ./secrets:/opt/tlo-mtls-proxy/secrets:ro
     restart: unless-stopped
