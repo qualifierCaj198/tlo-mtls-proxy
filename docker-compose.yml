@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./secrets:/opt/tlo-mtls-proxy/secrets:ro
+    restart: unless-stopped
